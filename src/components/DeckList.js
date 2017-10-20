@@ -1,24 +1,13 @@
-import { observer, inject } from 'mobx-react';
 import React from 'react';
 import { FlatList, StyleSheet, View, Text, StatusBar } from 'react-native';
+import { observer, inject } from 'mobx-react';
 import { loadDecks } from '../helpers/storageHelper';
+import DeckListItem from './DeckListItem';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 22,
-  },
-  item: {
-    padding: 40,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  deckHeader: {
-    fontSize: 26,
-  },
-  deckSubheader: {
-    fontSize: 20,
   },
   separator: {
     height: 1,
@@ -31,36 +20,30 @@ const styles = StyleSheet.create({
 export default class DeckList extends React.Component {
   async componentDidMount() {
     loadDecks();
-    // Promise.all([
-    //   saveDeckTitle('Science'),
-    //   saveDeckTitle('Math'),
-    //   saveDeckTitle('Geography'),
-    //   addCardToDeck('Science', { question: 'How far is the Moon?', answer: "I don't know" }),
-    // ]).then(async () => {
-    //   const deck = await getDeck('Science');
-    //   console.log('---------------deck', deck);
-    // });
   }
 
-  keyExtractor = data => data.title;
-
-  renderItem = (data) => {
-    const { item } = data;
-    return (
-      <View style={styles.item}>
-        <Text style={styles.deckHeader}>{item.title}</Text>
-        <Text style={styles.deckSubHeader}>{item.cardsCount} cards</Text>
-      </View>
-    );
+  onPressItem = (item) => {
+    const { navigate } = this.props.navigation;
+    navigate('DeckDetails', { item });
   };
+
+  keyExtractor = item => item.title;
+
+  renderItem = ({ item }) => (
+    <DeckListItem
+      onPressItem={() => this.onPressItem(item)}
+      title={item.title}
+      subTitle={`${item.cardsCount} cards`}
+    />
+  );
 
   renderSeparator = () => <View style={styles.separator} />;
 
   render() {
     const { store } = this.props;
-    const datasource = Object.keys(store.decks).map(d => ({
-      title: d,
-      cardsCount: store.decks[d].questions.length,
+    const datasource = Object.keys(store.decks).map(data => ({
+      title: data,
+      cardsCount: store.decks[data].questions.length,
     }));
     return (
       <View style={styles.container}>
