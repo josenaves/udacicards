@@ -10,7 +10,7 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0",
-    "jest-expo": "^21.0.0",
+    "jest-expo": "^22.0.0",
     "react-native-scripts": "1.5.0",
     "react-test-renderer": "16.0.0-alpha.12"
   },
@@ -28,12 +28,13 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^5.2.0",
-    "expo": "^21.0.0",
+    "expo": "^22.0.0",
     "mobx": "^3.3.1",
     "mobx-react": "^4.3.3",
     "prop-types": "^15.6.0",
-    "react": "16.0.0-alpha.12",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-21.0.2.tar.gz",
+    "react": "16.0.0-beta.5",
+    "react-native":
+      "https://github.com/expo/react-native/archive/sdk-22.0.1.tar.gz",
     "react-navigation": "^1.0.0-beta.15"
   }
 }
