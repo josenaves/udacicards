@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { observer, inject } from 'mobx-react';
 import TextButton from './TextButton';
 import { white, black } from '../colors';
@@ -47,13 +47,27 @@ const styles = StyleSheet.create({
 
 @inject('store')
 @observer
-export default class AddDeck extends React.Component {
+export default class DeckDetails extends React.Component {
   render() {
+    const { navigate } = this.props.navigation;
+    const { item } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-        <Text style={styles.deckHeader}>What is the title of your new deck?</Text>
-        <TextInput style={{}} placeholder="Type deck name!" />
-        <TextButton style={[styles.button, styles.buttonWhite]}>Submit</TextButton>
+        <View style={styles.titleContainer}>
+          <Text style={styles.deckHeader}>{item.title}</Text>
+          <Text style={styles.deckSubheader}>{item.cardsCount} cards</Text>
+        </View>
+        <View style={styles.buttonsContainer}>
+          <TextButton
+            style={[styles.button, styles.buttonWhite]}
+            onPress={() => navigate('AddCard')}
+          >
+            Add card
+          </TextButton>
+          <TextButton style={[styles.button, styles.buttonBlack]} onPress={() => navigate('Quiz')}>
+            Start Quiz
+          </TextButton>
+        </View>
       </View>
     );
   }
