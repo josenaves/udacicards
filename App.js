@@ -2,10 +2,11 @@ import React from 'react';
 import { View, Platform, StatusBar } from 'react-native';
 import { Provider, observer } from 'mobx-react/native';
 import { useStrict } from 'mobx';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Constants } from 'expo';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import DeckList from './src/components/DeckList';
+import DeckDetails from './src/components/DeckDetails';
 import AddDeck from './src/components/AddDeck';
 import { purple, white } from './src/colors';
 import store from './src/store/Store';
@@ -32,7 +33,7 @@ const Tabs = TabNavigator(
     AddDeck: {
       screen: AddDeck,
       navigationOptions: {
-        tabBarLabel: 'Add Deck',
+        tabBarLabel: 'New Deck',
         tabBarIcon: ({ tintColor }) => (
           <FontAwesome name="plus-square" size={30} color={tintColor} />
         ),
@@ -60,6 +61,30 @@ const Tabs = TabNavigator(
   },
 );
 
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: Tabs,
+  },
+  DeckDetails: {
+    screen: DeckDetails,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      },
+    },
+  },
+  AddDeck: {
+    screen: AddDeck,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      },
+    },
+  },
+});
+
 @observer
 export default class App extends React.Component {
   render() {
@@ -67,7 +92,7 @@ export default class App extends React.Component {
       <Provider store={store}>
         <View style={{ flex: 1 }}>
           <UdacityStatusBar backgroundColor={purple} />
-          <Tabs />
+          <MainNavigator />
         </View>
       </Provider>
     );
