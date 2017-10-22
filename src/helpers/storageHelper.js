@@ -70,16 +70,16 @@ export const saveDeckTitle = async (title) => {
   }
 };
 
-export const addCardToDeck = async (title, card) => {
+export const addCardToDeck = async (deckTitle, card) => {
   let decks = store.getDecks;
   if (!decks) {
     decks = await getDecks();
   }
 
-  if (!decks[title]) {
-    decks[title] = { name: title, questions: [{ ...card }] };
+  if (!decks[deckTitle]) {
+    decks[deckTitle] = { name: deckTitle, questions: [{ ...card }] };
   } else {
-    decks[title].questions = [...decks[title].questions, card];
+    decks[deckTitle].questions = [...decks[deckTitle].questions, card];
   }
 
   store.setDecks(decks);
