@@ -48,6 +48,10 @@ const styles = StyleSheet.create({
 @inject('store')
 @observer
 export default class DeckDetails extends React.Component {
+  static navigationOptions = {
+    title: 'udacicards',
+  };
+
   render() {
     const { navigate } = this.props.navigation;
     const { item } = this.props.navigation.state.params;
@@ -60,7 +64,7 @@ export default class DeckDetails extends React.Component {
         <View style={styles.buttonsContainer}>
           <TextButton
             style={[styles.button, styles.buttonWhite]}
-            onPress={() => navigate('AddCard')}
+            onPress={() => navigate('AddCard', { deck: item.title })}
           >
             Add card
           </TextButton>
