@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent, Component } from 'react';
 import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 import { observer, inject } from 'mobx-react';
 import { lightgrey } from '../colors';
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 
 @inject('store')
 @observer
-export default class DeckListItem extends React.PureComponent {
+export default class DeckListItem extends Component {
   render() {
     const { title, subTitle, onPressItem } = this.props;
     return (

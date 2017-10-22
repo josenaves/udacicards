@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { FlatList, StyleSheet, View, Text, StatusBar } from 'react-native';
 import { observer, inject } from 'mobx-react';
 import { loadDecks } from '../helpers/storageHelper';
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 
 @inject('store')
 @observer
-export default class DeckList extends React.Component {
+export default class DeckList extends Component {
   async componentDidMount() {
     loadDecks();
   }
