@@ -24,18 +24,22 @@ export default class DeckList extends Component {
 
   onPressItem = (item) => {
     const { navigate } = this.props.navigation;
-    navigate('DeckDetails', { item });
+    navigate('DeckDetails', { deck: item.title });
   };
 
   keyExtractor = item => item.title;
 
-  renderItem = ({ item }) => (
-    <DeckListItem
-      onPressItem={() => this.onPressItem(item)}
-      title={item.title}
-      subTitle={`${item.cardsCount} cards`}
-    />
-  );
+  renderItem = ({ item }) => {
+    const { cardsCount } = item;
+    const cardsCountText = cardsCount === 1 ? `${cardsCount} card` : `${cardsCount} cards`;
+    return (
+      <DeckListItem
+        onPressItem={() => this.onPressItem(item)}
+        title={item.title}
+        subTitle={cardsCountText}
+      />
+    );
+  };
 
   renderSeparator = () => <View style={styles.separator} />;
 

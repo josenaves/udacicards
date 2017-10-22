@@ -8,6 +8,7 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import DeckList from './src/components/DeckList';
 import DeckDetails from './src/components/DeckDetails';
 import AddDeck from './src/components/AddDeck';
+import AddCard from './src/components/AddCard';
 import { purple, white } from './src/colors';
 import store from './src/store/Store';
 
@@ -76,6 +77,15 @@ const MainNavigator = StackNavigator({
   },
   AddDeck: {
     screen: AddDeck,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      },
+    },
+  },
+  AddCard: {
+    screen: AddCard,
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
