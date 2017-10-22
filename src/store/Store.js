@@ -3,9 +3,10 @@ import { observable, computed, action } from 'mobx';
 class Store {
   @observable decks = {};
 
+  // number of decks
   @computed
-  get count() {
-    return this.decks.length;
+  get decksCount() {
+    return Object.keys(this.decks).length;
   }
 
   @computed
