@@ -54,17 +54,22 @@ export default class DeckDetails extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    const { item } = this.props.navigation.state.params;
+    const { deck } = this.props.navigation.state.params;
+    const { store } = this.props;
+    const cardsCount = store.decks[deck].questions.length;
+
+    const cardsCountText = cardsCount === 1 ? `${cardsCount} card` : `${cardsCount} cards`;
+
     return (
       <View style={styles.container}>
         <View style={styles.titleContainer}>
-          <Text style={styles.deckHeader}>{item.title}</Text>
-          <Text style={styles.deckSubheader}>{item.cardsCount} cards</Text>
+          <Text style={styles.deckHeader}>{deck}</Text>
+          <Text style={styles.deckSubheader}>{cardsCountText}</Text>
         </View>
         <View style={styles.buttonsContainer}>
           <TextButton
             style={[styles.button, styles.buttonWhite]}
-            onPress={() => navigate('AddCard', { deck: item.title })}
+            onPress={() => navigate('AddCard', { deck })}
           >
             Add card
           </TextButton>
