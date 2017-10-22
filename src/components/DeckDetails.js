@@ -73,7 +73,10 @@ export default class DeckDetails extends React.Component {
           >
             Add card
           </TextButton>
-          <TextButton style={[styles.button, styles.buttonBlack]} onPress={() => navigate('Quiz')}>
+          <TextButton
+            style={[styles.button, styles.buttonBlack]}
+            onPress={() => navigate('Quiz', { deck })}
+          >
             Start Quiz
           </TextButton>
         </View>

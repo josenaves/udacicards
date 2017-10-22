@@ -9,6 +9,7 @@ import DeckList from './src/components/DeckList';
 import DeckDetails from './src/components/DeckDetails';
 import AddDeck from './src/components/AddDeck';
 import AddCard from './src/components/AddCard';
+import Quiz from './src/components/Quiz';
 import { purple, white } from './src/colors';
 import store from './src/store/Store';
 
@@ -86,6 +87,15 @@ const MainNavigator = StackNavigator({
   },
   AddCard: {
     screen: AddCard,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      },
+    },
+  },
+  Quiz: {
+    screen: Quiz,
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
