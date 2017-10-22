@@ -21,7 +21,7 @@ const UdacityStatusBar = ({ backgroundColor, ...props }) => (
 
 const Tabs = TabNavigator(
   {
-    Decks: {
+    DeckList: {
       screen: DeckList,
       navigationOptions: {
         tabLabel: 'Decks',

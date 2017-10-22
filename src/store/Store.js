@@ -8,6 +8,11 @@ class Store {
     return this.decks.length;
   }
 
+  @computed
+  get deckTitles() {
+    return Object.keys(this.decks);
+  }
+
   @action
   setDecks(decks) {
     this.decks = decks;
