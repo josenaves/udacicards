@@ -3,7 +3,7 @@ import { StyleSheet, View, TextInput, Alert } from 'react-native';
 import { observer, inject } from 'mobx-react';
 import TextButton from './TextButton';
 import { white, black } from '../colors';
-import { saveDeckTitle } from '../helpers/storageHelper';
+import { addCardToDeck } from '../helpers/storageHelper';
 
 const styles = StyleSheet.create({
   container: {
@@ -45,12 +45,35 @@ export default class AddCard extends Component {
   constructor(props) {
     super(props);
     this.state = { question: '', answer: '' };
-    console.log('props:', props);
   }
 
-  saveCard() {
-    // props.navigation.state.params.deck
-  }
+  saveCard = async () => {
+    const { navigation } = this.props;
+    const { deck } = navigation.state.params;
+    const { question, answer } = this.state;
+    const { store } = this.props;
+
+    if (!question) {
+      Alert.alert('Warning', 'Question cannot be empty !');
+      return;
+    }
+
+    const arrQuestions = store.decks[deck].questions;
+    const questions = arrQuestions.map(e => e.question);
+    if (questions.includes(question)) {
+      Alert.alert('Warning', 'Question was previous created !');
+      return;
+    }
+
+    if (!answer) {
+      Alert.alert('Warning', 'Answer cannot be empty !');
+      return;
+    }
+
+    await addCardToDeck(deck, { question, answer });
+    this.setState({ question: '', answer: '' });
+    navigation.goBack();
+  };
 
   render() {
     return (
@@ -69,7 +92,7 @@ export default class AddCard extends Component {
           value={this.state.answer}
         />
 
-        <TextButton style={[styles.button, styles.buttonBlack]} onPress={this.saveDeck}>
+        <TextButton style={[styles.button, styles.buttonBlack]} onPress={this.saveCard}>
           Submit
         </TextButton>
       </View>
