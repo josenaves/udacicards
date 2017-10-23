@@ -15,8 +15,8 @@ class Store {
   }
 
   @action
-  setDecks(decks) {
-    this.decks = decks;
+  setDecks(brandNewDecks) {
+    this.decks = brandNewDecks;
   }
 }
 
