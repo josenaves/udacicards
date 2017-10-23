@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Platform, StatusBar } from 'react-native';
 import { Provider, observer } from 'mobx-react/native';
 import { useStrict } from 'mobx';
@@ -12,6 +12,7 @@ import AddCard from './src/components/AddCard';
 import Quiz from './src/components/Quiz';
 import { purple, white } from './src/colors';
 import store from './src/store/Store';
+import { setLocalNotification } from './src/helpers/notificationHelper';
 
 useStrict(true);
 
@@ -106,7 +107,12 @@ const MainNavigator = StackNavigator({
 });
 
 @observer
-export default class App extends React.Component {
+export default class App extends Component {
+  async componentDidMount() {
+    // schedule notification
+    await setLocalNotification();
+  }
+
   render() {
     return (
       <Provider store={store}>

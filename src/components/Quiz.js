@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { observer, inject } from 'mobx-react';
 import TextButton from './TextButton';
-import { white, black } from '../colors';
+import { white } from '../colors';
+import { clearLocalNotification, setLocalNotification } from '../helpers/notificationHelper';
 
 const styles = StyleSheet.create({
   container: {
@@ -82,6 +83,11 @@ export default class Quiz extends Component {
     };
   }
 
+  async componentDidMount() {
+    await clearLocalNotification();
+    await setLocalNotification();
+  }
+
   toggleCard = () => {
     this.setState(state => ({ showQuestion: !state.showQuestion }));
   };
@@ -142,8 +148,8 @@ export default class Quiz extends Component {
       content = (
         <View style={styles.cardContainer}>
           <Text style={styles.title}>Quiz finished!</Text>
-          <Text style={styles.title}>Correct anwswers: {this.state.totalCorrect}</Text>
-          <Text style={styles.title}>Incorrect anwswers: {this.state.totalIncorrect}</Text>
+          <Text style={styles.title}>Correct answers: {this.state.totalCorrect}</Text>
+          <Text style={styles.title}>Incorrect answers: {this.state.totalIncorrect}</Text>
         </View>
       );
     } else {
