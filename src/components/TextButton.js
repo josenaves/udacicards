@@ -9,9 +9,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function TextButton({ children, onPress, style = {} }) {
+export default function TextButton({children, onPress, style = {}, disabled=false}) {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={onPress} disabled={disabled}>
       <Text style={[styles.reset, style]}>{children}</Text>
     </TouchableOpacity>
   );

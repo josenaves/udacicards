@@ -57,7 +57,6 @@ export default class DeckDetails extends React.Component {
     const { deck } = this.props.navigation.state.params;
     const { store } = this.props;
     const cardsCount = store.decks[deck].questions.length;
-
     const cardsCountText = cardsCount === 1 ? `${cardsCount} card` : `${cardsCount} cards`;
 
     return (
@@ -73,12 +72,16 @@ export default class DeckDetails extends React.Component {
           >
             Add card
           </TextButton>
+
+          { cardsCount > 0 &&
           <TextButton
+            disabled={cardsCount === 0}
             style={[styles.button, styles.buttonBlack]}
             onPress={() => navigate('Quiz', { deck })}
           >
             Start Quiz
           </TextButton>
+          }
         </View>
       </View>
     );
