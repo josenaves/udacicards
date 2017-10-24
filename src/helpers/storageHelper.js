@@ -53,7 +53,6 @@ export const getDeck = async (id) => {
 export const saveDeckTitle = async (title) => {
   try {
     let value = await getDecks();
-    console.log('read:', value);
     if (!value) {
       value = {};
     }
