@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     flex: 5,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
     padding: 10,
   },
@@ -30,6 +30,10 @@ const styles = StyleSheet.create({
     fontSize: 50,
     textAlign: 'center',
   },
+  subTitle: {
+    fontSize: 30,
+    textAlign: 'center',
+  },
   button: {
     fontSize: 25,
     width: 200,
@@ -39,7 +43,7 @@ const styles = StyleSheet.create({
   },
   buttonAnswer: {
     color: 'red',
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
     padding: 10,
   },
@@ -127,7 +131,6 @@ export default class Quiz extends Component {
   };
 
   restartQuiz = () => {
-    console.log('restartQuiz');
     this.setState({
       currentCard: 0,
       totalIncorrect: 0,
@@ -147,9 +150,9 @@ export default class Quiz extends Component {
     if (this.state.quizFinished) {
       content = (
         <View style={styles.cardContainer}>
-          <Text style={styles.title}>Quiz finished!</Text>
-          <Text style={styles.title}>Correct answers: {this.state.totalCorrect}</Text>
-          <Text style={styles.title}>Incorrect answers: {this.state.totalIncorrect}</Text>
+          <Text style={styles.title}>Quiz finished</Text>
+          <Text style={styles.subTitle}>Correct answers: {this.state.totalCorrect}</Text>
+          <Text style={styles.subTitle}>Incorrect answers: {this.state.totalIncorrect}</Text>
         </View>
       );
     } else {
